@@ -1,0 +1,60 @@
+{
+  "name": "mongodb-shadow",
+  "version": "1.0.0",
+  "description": "mongodb mock for nestjs",
+  "main": "dist/index.js",
+  "repository": "https://github.com/amehat/mongodb-shadow.git",
+  "author": "Arnaud Méhat <amehat@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "nest build",
+    "dev": "NODE_ENV=dev ts-node-dev --transpile-only -r tsconfig-paths/register src/index.ts",
+    "lint:js": "eslint src",
+    "lint:ts": "tsc -p tsconfig.json --noEmit",
+    "lint": "npm-run-all  lint:*",
+    "nest": "./node_modules/.bin/nest",
+    "prebuild": "rimraf dist",
+    "start": "node dist/src/index",
+    "start:example:01": "NODE_ENV=dev ts-node-dev --transpile-only -r tsconfig-paths/register examples/example-01/index.ts",
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --watchAll"
+  },
+  "lint-staged": {
+    "*.{json,md}": "prettier --write",
+    "*.{js,ts,tsx}": "eslint --fix"
+  },
+  "dependencies": {
+    "@mikro-orm/core": "^4.5.9",
+    "@mikro-orm/mongodb": "^4.5.9",
+    "@mikro-orm/nestjs": "^4.3.1",
+    "@nestjs/common": "^8.3.1",
+    "@nestjs/core": "^8.3.1",
+    "@nestjs/platform-express": "^8.2.3",
+    "jest": "^27.5.1",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.5.4",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.5",
+    "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^8.2.0",
+    "@nestjs/testing": "^8.2.6",
+    "@types/jest": "^27.0.3",
+    "@types/uuid": "^8.3.3",
+    "eslint": "^7.28.0",
+    "eslint-config-airbnb-typescript": "14.0.2",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-jest": "^26.0.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier": "^2.5.1",
+    "ts-jest": "^27.1.3",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2"
+  }
+}
