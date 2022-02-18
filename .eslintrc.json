@@ -13,6 +13,11 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
+  "rules": {
+    "sort-imports": ["error", {
+      "allowSeparatedGroups": true
+    }]
+  },
   "overrides": [
     {
       "files": [
