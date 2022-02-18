@@ -1,20 +1,47 @@
 # mongodb-shadow
 
-mongodb mock for nestjs
+Mock MongoDB for testing with NestJS
 
-The MockStoreRepository creates an in-memory store with basic functionality.
+The MongodbShadow creates an in-memory store with basic functionality.
 
-It was set up to interface with the orm Mikro-orm.
+## Example
 
-- create
-- save
-- find (Only the operators $in, $re and $regex go first level can be used)
-- findOne
-- findOneOrFail
-- findAndCount
-- persistAndFlush
-- remove
-- removeAndFlush
-- delete
+```typescript
+import { MongoDB, MongoDBShadowModule } from 'mongodb-shadow';
+import type { InsertOneResponse, MongoDBEntity } from 'mongodb-shadow';
 
-The $re operator corresponds to the $regex operator but for the orm Mikro-orm.
+type User = MongoDBEntity & { name: string };
+
+describe('Mongodb', () => {
+  let mongodb: MongoDB;
+
+  beforeEach(async () => {
+    const module = await Test.createTestingModule({
+      imports: [MongoDBShadowModule],
+    }).compile();
+
+    mongodb = module.get<MongoDB>(MongoDB);
+  });
+
+  // ...
+  it('...', () => {
+      mongodb.createDatabase('user'); // Create Database
+      mongodb.getCollection('user', 'user'); // Add Collection to Database
+
+      // or
+      mongodb.useDatabase('db'); // Create Database
+      mongodb.useCollection('user'); // Add Collection to Database current
+
+      // or
+      mongodb.useDatabase('db').useCollection('user'); // Create Database and Collection
+
+      mongodb.addDocument<User>('db', 'user', { name: 'joe doe' }); // Add Document
+
+      expect(mongodb.getCollection<User>('db', 'user')[0].name).toEqual('joe doe'); // Verification that the registration was successful
+
+      // Native methods
+
+      mongodb.insertOne({ name: 'joe doe' }); // Insert One document
+  });
+});
+```
