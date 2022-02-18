@@ -1,10 +1,7 @@
+import type { ID, InsertOneResponse, MongoDBEntity } from '../../mongodb.type';
+import WriteError from '../common/write-error';
 // eslint-disable-next-line import/no-cycle
-import { ObjectID } from 'bson';
-
-import type { InsertOneResponse, MongoDBEntity } from '../mongodb.type';
-import WriteError from './common/write-error';
-// eslint-disable-next-line import/no-cycle
-import MongoDB from '../mongodb.service';
+import MongoDB from '../../mongodb.service';
 
 /**
  * Inserts a single document into a collection.
@@ -50,7 +47,7 @@ export default class InsertOne {
     };
   }
 
-  checkUniquenessObjectID(id: ObjectID): boolean {
+  checkUniquenessObjectID(id: ID): boolean {
     if (
       !Array.from(
         this.mongoDB.getCollection(

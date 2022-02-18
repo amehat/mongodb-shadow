@@ -5,11 +5,18 @@ export interface Document {
   [key: string]: any;
 }
 
+export type ID = ObjectID | string | number;
+
 export type MongoDBEntity = {
-  _id?: ObjectID;
+  _id?: ID;
+};
+
+export type InsertResponse = {
+  acknowledged: boolean;
+  insertedId?: ID;
 };
 
 export type InsertOneResponse = {
   acknowledged: boolean;
-  insertedId?: ObjectID;
+  insertedId?: ID;
 };

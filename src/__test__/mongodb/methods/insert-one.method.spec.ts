@@ -1,11 +1,11 @@
 import { ObjectId } from 'bson';
 import { Test } from '@nestjs/testing';
 
-import { InsertOneResponse, MongoDBEntity } from '../../mongodb.type';
-import InsertOne from '../../mongodb/insert-one.method';
-import MongoDB from '../../mongodb.service';
-import MongoDBShadowModule from '../../mongodb-shadow.module';
-import WriteError from '../../mongodb/common/write-error';
+import { InsertOneResponse, MongoDBEntity } from '../../../mongodb.type';
+import InsertOne from '../../../mongodb/methods/insert-one.method';
+import MongoDB from '../../../mongodb.service';
+import MongoDBShadowModule from '../../../mongodb-shadow.module';
+import WriteError from '../../../mongodb/common/write-error';
 
 type User = MongoDBEntity & { name: string };
 

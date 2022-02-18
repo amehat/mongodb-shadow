@@ -1,4 +1,5 @@
 import type { BulkWriteOperationError } from './mongodb-common.types';
+import type { Document } from '../../mongodb.type';
 
 export default class WriteError {
   err: BulkWriteOperationError;
