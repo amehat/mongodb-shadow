@@ -18,5 +18,9 @@
     "strictPropertyInitialization": false,
     "target": "es2019"
   },
+  "include": [
+    "examples/**/*",
+    "src/**/*"
+  ],
   "exclude": ["**/node_modules"]
 }

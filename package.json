@@ -10,6 +10,7 @@
   "scripts": {
     "build": "nest build",
     "dev": "NODE_ENV=dev ts-node-dev --transpile-only -r tsconfig-paths/register src/index.ts",
+    "example:mikro-orm": "NODE_ENV=dev ts-node-dev --transpile-only -r tsconfig-paths/register example/mikro-orm/index.ts",
     "lint:js": "eslint src",
     "lint:ts": "tsc -p tsconfig.json --noEmit",
     "lint": "npm-run-all  lint:*",
@@ -23,6 +24,12 @@
   "lint-staged": {
     "*.{json,md}": "prettier --write",
     "*.{js,ts,tsx}": "eslint --fix"
+  },
+  "mikro-orm": {
+    "useTsNode": true,
+    "configPaths": [
+      "./example/mikro-orm/mikro-orm.config.ts"
+    ]
   },
   "dependencies": {
     "@mikro-orm/core": "^4.5.9",
