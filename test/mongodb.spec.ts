@@ -2,7 +2,7 @@
 import { ObjectID } from 'bson';
 import { Test } from '@nestjs/testing';
 
-import type { InsertOneResponse, MongoDBEntity } from '../src';
+import type { InsertOneResponse, InsertResponse, MongoDBEntity } from '../src';
 import { MongoDB, MongoDBShadowModule } from '../src';
 
 type User = MongoDBEntity & { name: string };
@@ -59,5 +59,21 @@ describe('Mongodb', () => {
     expect(mongodb.getCollection<User>('db', 'user')[0]._id).toBeDefined();
     expect(mongodb.getCollection<User>('db', 'user')[0]._id).toBeInstanceOf(ObjectID);
     expect(mongodb.getCollection<User>('db', 'user')[0]._id).toEqual(resultInsertOne.insertedId);
+  });
+
+  it('should be able to insert multiple documents', () => {
+    mongodb.useDatabase('db').useCollection('user');
+    type Product = MongoDBEntity & { item: string; qty: number; type?: string };
+    const documents = [
+      { _id: 11, item: 'pencil', qty: 50, type: 'no.2' },
+      { item: 'pen', qty: 20 },
+      { item: 'eraser', qty: 25 },
+    ];
+    const resultInsert = mongodb.insert<Product>(documents);
+    expect((resultInsert as InsertResponse[]).length).toEqual(3);
+    expect((resultInsert as InsertResponse[])[0].insertedId).toEqual(11);
+    expect((resultInsert as InsertResponse[])[0].acknowledged).toEqual(true);
+    expect((resultInsert as InsertResponse[])[1].insertedId).toBeInstanceOf(ObjectID);
+    expect((resultInsert as InsertResponse[])[2].insertedId).toBeInstanceOf(ObjectID);
   });
 });

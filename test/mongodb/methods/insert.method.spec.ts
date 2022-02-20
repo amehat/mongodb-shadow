@@ -46,7 +46,7 @@ describe('MongoDB:insert', () => {
     expect(resultInsertRetry.errInfo).toEqual({ name: 'joe doe', _id: new ObjectId(objectId) });
   });
 
-  it('devrait pouvoir insérer plusieurs documents', () => {
+  it('should be able to insert multiple documents', () => {
     type Product = MongoDBEntity & { item: string; qty: number; type?: string };
     const documents = [
       { _id: 11, item: 'pencil', qty: 50, type: 'no.2' },
@@ -55,7 +55,6 @@ describe('MongoDB:insert', () => {
     ];
     const resultInsert = new Insert(mongodb).execute<Product>('db', 'user', documents);
     expect((resultInsert as InsertResponse[]).length).toEqual(3);
-    // eslint-disable-next-line no-underscore-dangle
     expect((resultInsert as InsertResponse[])[0].insertedId).toEqual(11);
     expect((resultInsert as InsertResponse[])[0].acknowledged).toEqual(true);
     expect((resultInsert as InsertResponse[])[1].insertedId).toBeInstanceOf(ObjectId);
