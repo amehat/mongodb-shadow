@@ -2,9 +2,8 @@
 import { ObjectID } from 'bson';
 import { Test } from '@nestjs/testing';
 
-import type { InsertOneResponse, MongoDBEntity } from '../mongodb.type';
-import MongoDB from '../mongodb.service';
-import MongoDBShadowModule from '../mongodb-shadow.module';
+import type { InsertOneResponse, MongoDBEntity } from '../src';
+import { MongoDB, MongoDBShadowModule } from '../src';
 
 type User = MongoDBEntity & { name: string };
 

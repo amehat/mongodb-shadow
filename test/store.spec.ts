@@ -2,8 +2,8 @@
 import { ObjectID } from 'bson';
 import { Test } from '@nestjs/testing';
 
-import type { MongoDBEntity } from 'src/mongodb.type';
-import Store from '../store';
+import type { MongoDBEntity } from '../src';
+import { Store } from '../src';
 
 type User = MongoDBEntity & { name: string };
 
