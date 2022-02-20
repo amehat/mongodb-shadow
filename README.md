@@ -30,7 +30,11 @@ describe('Mongodb', () => {
   // ...
   it('...', () => {
       mongodb.createDatabase('user'); // Create Database
-      mongodb.getCollection('user', 'user'); // Add Collection to Database
+      mongodb.createCollection('user', 'user'); // Add Collection to Database
+
+      // or 
+
+      mongodb.createDatabase('user')..createCollection('user', 'user'); // Create Database and Collection
 
       // or
       mongodb.useDatabase('factory'); // Create Database
