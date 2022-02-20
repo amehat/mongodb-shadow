@@ -14,7 +14,7 @@ import type { InsertOneResponse, MongoDBEntity } from 'mongodb-shadow';
 
 type User = MongoDBEntity & { name: string };
 
-type Product = MongoDBEntity & { item: string; qty: number };
+type Product = MongoDBEntity & { item: string; qty: number; type?: string };
 
 describe('Mongodb', () => {
   let mongodb: MongoDB;
@@ -46,10 +46,10 @@ describe('Mongodb', () => {
 
       // Native methods
 
-      mongodb.insertOne({ item: 'card', qty: 15 }); // Insert One document
+      mongodb.insertOne<Product>({ item: 'card', qty: 15 }); // Insert One document
 
-      mongodb.insert({ item: 'card', qty: 15 }); // Insert One document
-      mongodb.insert([
+      mongodb.insert<Product>({ item: 'card', qty: 15 }); // Insert One document
+      mongodb.insert<Product>([
         { _id: 11, item: 'pencil', qty: 50, type: 'no.2' },
         { item: 'pen', qty: 20 },
         { item: 'eraser', qty: 25 },
