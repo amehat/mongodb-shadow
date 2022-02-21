@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 import EntityRepository from '../../../../src/mikro-orm/entity.repository';
-import MongoDB from '../../../../src/mongodb.service';
+import MongoDB from '../../../../src/mongodb/mongodb.service';
 import Product from '../product.entity';
 import ProductRepository from '../product.repository';
 import ProductService from '../product.service';

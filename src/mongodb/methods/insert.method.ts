@@ -3,10 +3,10 @@ import type {
   ID,
   InsertResponse,
   MongoDBEntity,
-} from '../../mongodb.type';
+} from '../mongodb.type';
 import WriteError from '../common/write-error';
 // eslint-disable-next-line import/no-cycle
-import MongoDB from '../../mongodb.service';
+import MongoDB from '../mongodb.service';
 import WriteResult from '../common/write-result';
 
 /**

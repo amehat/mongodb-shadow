@@ -32,7 +32,7 @@ describe('Mongodb', () => {
       mongodb.createDatabase('user'); // Create Database
       mongodb.createCollection('user', 'user'); // Add Collection to Database
 
-      // or 
+      // or
 
       mongodb.createDatabase('user')..createCollection('user', 'user'); // Create Database and Collection
 
@@ -58,6 +58,49 @@ describe('Mongodb', () => {
         { item: 'pen', qty: 20 },
         { item: 'eraser', qty: 25 },
       ]); // Insert multiple documents
+  });
+});
+```
+
+use with Mikro-orm
+
+```typescript
+describe('Mikro-orm', () => {
+  let productService: ProductService;
+  let productRepository: EntityRepository<Product>;
+  const mongoDB = new MongoDB();
+
+  beforeEach(async () => {
+    productRepository = new EntityRepository<Product>('db', 'products', mongoDB);
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        ProductService,
+        {
+          provide: ProductRepository,
+          useValue: productRepository,
+        },
+      ],
+    }).compile();
+
+    productService = module.get<ProductService>(ProductService);
+  });
+
+  it('should validate that a recording has been made', async () => {
+    const data = {
+      name: 'Test',
+      price: 10,
+      qty: 3,
+    };
+    expect(await productService.save(data)).toEqual(data);
+    const productCollection = mongoDB.getCollection<Product>(
+      mongoDB.getDatabaseName(),
+      mongoDB.getCollectionName(),
+    );
+    expect(productCollection[0].name).toEqual(data.name);
+    expect(productCollection[0].price).toEqual(data.price);
+    expect(productCollection[0].qty).toEqual(data.qty);
+    // eslint-disable-next-line no-underscore-dangle
+    expect(productCollection[0]._id).toBeDefined();
   });
 });
 ```

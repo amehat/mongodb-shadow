@@ -1,7 +1,7 @@
-import type { ID, InsertOneResponse, MongoDBEntity } from '../../mongodb.type';
+import type { ID, InsertOneResponse, MongoDBEntity } from '../mongodb.type';
 import WriteError from '../common/write-error';
 // eslint-disable-next-line import/no-cycle
-import MongoDB from '../../mongodb.service';
+import MongoDB from '../mongodb.service';
 
 /**
  * Inserts a single document into a collection.

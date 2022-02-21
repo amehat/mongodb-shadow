@@ -1,5 +1,5 @@
 import { AnyEntity } from '@mikro-orm/core';
-import MongoDB from '../mongodb.service';
+import MongoDB from '../mongodb/mongodb.service';
 
 export default class EntityRepository<T extends AnyEntity<T>> {
   private currentData: AnyEntity<T>;

@@ -1,4 +1,4 @@
-import type { Document } from '../../mongodb.type';
+import type { Document } from '../mongodb.type';
 
 /**
  * Operations command

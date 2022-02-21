@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ObjectID } from 'bson';
 
 import type { Database } from './types';
-import { MongoDBEntity } from './mongodb.type';
+import { MongoDBEntity } from './mongodb/mongodb.type';
 
 /**
  * Database in memory

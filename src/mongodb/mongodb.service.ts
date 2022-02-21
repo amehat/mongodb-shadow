@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 
-import Store from './store';
+import Store from '../store';
 // eslint-disable-next-line import/no-cycle
-import InsertOne from './mongodb/methods/insert-one.method';
+import InsertOne from './methods/insert-one.method';
 // eslint-disable-next-line sort-imports
 import type { InsertOneResponse, InsertResponse } from './mongodb.type';
-import WriteError from './mongodb/common/write-error';
+import WriteError from './common/write-error';
 // eslint-disable-next-line import/no-cycle
-import Insert from './mongodb/methods/insert.method';
+import Insert from './methods/insert.method';
 
 @Injectable()
 export default class MongoDB extends Store {
