@@ -1,12 +1,12 @@
 # mongodb-shadow
 
-Mock MongoDB for testing with NestJS
+Mock MongoDB for testing with NestJS with jest.
 
 The MongodbShadow creates an in-memory store with basic functionality.
 
 ## Example
 
-With jest
+use with MongoDB
 
 ```typescript
 import { MongoDB, MongoDBShadowModule } from 'mongodb-shadow';
