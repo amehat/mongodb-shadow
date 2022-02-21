@@ -65,6 +65,10 @@ describe('Mongodb', () => {
 use with Mikro-orm
 
 ```typescript
+import { MongoDB } from 'mongodb-shadow';
+
+import Product from './product.entity';
+
 describe('Mikro-orm', () => {
   let productService: ProductService;
   let productRepository: EntityRepository<Product>;
@@ -86,20 +90,19 @@ describe('Mikro-orm', () => {
   });
 
   it('should validate that a recording has been made', async () => {
-    const data = {
+    const product = {
       name: 'Test',
       price: 10,
       qty: 3,
     };
-    expect(await productService.save(data)).toEqual(data);
+    expect(await productService.save(product)).toEqual(product);
     const productCollection = mongoDB.getCollection<Product>(
       mongoDB.getDatabaseName(),
       mongoDB.getCollectionName(),
     );
-    expect(productCollection[0].name).toEqual(data.name);
-    expect(productCollection[0].price).toEqual(data.price);
-    expect(productCollection[0].qty).toEqual(data.qty);
-    // eslint-disable-next-line no-underscore-dangle
+    expect(productCollection[0].name).toEqual(product.name);
+    expect(productCollection[0].price).toEqual(product.price);
+    expect(productCollection[0].qty).toEqual(product.qty);
     expect(productCollection[0]._id).toBeDefined();
   });
 });
