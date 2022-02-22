@@ -15,7 +15,7 @@ import type { FindResponse } from './commands/types';
 @Injectable()
 export default class MongoDB extends Store {
   async find<T>(find: string): Promise<FindResponse> {
-    return new Find(this).execute(this.databaseName, this.collectionName, find)
+    return new Find(this).execute<T>(this.databaseName, this.collectionName, find)
   }
 
   insertOne<T>(document: T): InsertOneResponse | WriteError {
