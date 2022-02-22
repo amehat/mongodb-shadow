@@ -8,9 +8,16 @@ import type { InsertOneResponse, InsertResponse } from './mongodb.type';
 import WriteError from './common/write-error';
 // eslint-disable-next-line import/no-cycle
 import Insert from './methods/insert.method';
+// eslint-disable-next-line import/no-cycle
+import Find from './commands/find.command';
+import type { FindResponse } from './commands/types';
 
 @Injectable()
 export default class MongoDB extends Store {
+  async find<T>(find: string): Promise<FindResponse> {
+    return new Find(this).execute(this.databaseName, this.collectionName, find)
+  }
+
   insertOne<T>(document: T): InsertOneResponse | WriteError {
     return new InsertOne(this).execute<T>(this.databaseName, this.collectionName, document);
   }

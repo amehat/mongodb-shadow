@@ -3,6 +3,7 @@ import { ObjectID } from 'bson';
 export interface Document {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
+  upsert?: boolean;
 }
 
 export type ID = ObjectID | string | number;

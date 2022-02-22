@@ -2,8 +2,16 @@
 import { ObjectID } from 'bson';
 import { Test } from '@nestjs/testing';
 
-import type { InsertOneResponse, InsertResponse, MongoDBEntity } from '../src';
-import { MongoDB, MongoDBShadowModule } from '../src';
+import type { InsertOneResponse, InsertResponse, MongoDBEntity } from '../../src';
+import { MongoDB, MongoDBShadowModule } from '../../src';
+import { generateId } from '../../src/mongodb/helper';
+
+jest.mock('../../src/mongodb/helper', () => {
+  return {
+    __esModule: true,
+    generateId: jest.fn().mockReturnValue('917731230327257600'),
+  }
+});
 
 type User = MongoDBEntity & { name: string };
 
@@ -75,5 +83,20 @@ describe('Mongodb', () => {
     expect((resultInsert as InsertResponse[])[0].acknowledged).toEqual(true);
     expect((resultInsert as InsertResponse[])[1].insertedId).toBeInstanceOf(ObjectID);
     expect((resultInsert as InsertResponse[])[2].insertedId).toBeInstanceOf(ObjectID);
+  });
+
+  it(`should return an empty array if no record exists in database when we call find()`, async () => {
+    mongodb.useDatabase('db').useCollection('user');
+    const find = 'name';
+    const result = await (mongodb.find<User>(find));
+    expect(result).toEqual({
+      cursor: {
+        firstBatch: [],
+        partialResultsReturned: false,
+        id: '917731230327257600',
+        ns: 'db.user',
+      },
+      ok: 1,
+    });
   });
 });

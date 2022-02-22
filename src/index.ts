@@ -4,6 +4,7 @@ export { default as InsertOne } from './mongodb/methods/insert-one.method';
 export { default as MongoDBShadowModule } from './mongodb-shadow.module';
 export { default as MongoDB } from './mongodb/mongodb.service';
 export { default as Store } from './store';
+export { default as Find } from './mongodb/commands/find.command';
 export { default as WriteError } from './mongodb/common/write-error';
 export * from './mongodb/mongodb.type';
 export * from './mongodb/common/mongodb-common.types';
