@@ -6,6 +6,10 @@ import ProductRepository from './product.repository';
 export default class ProductService {
   constructor(private productRepository: ProductRepository) {}
 
+  async findAll(): Promise<Product[]> {
+    return this.productRepository.find<Product>({});
+  }
+
   async save(data: Product): Promise<Product> {
     const product = this.productRepository.create(data);
     await this.productRepository.persistAndFlush(product);

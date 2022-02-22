@@ -21,7 +21,7 @@ export default class Find {
     databaseName: string,
     collectionName: string,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    find: string,
+    find: string | Record<string, unknown>,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     filter?: Document,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

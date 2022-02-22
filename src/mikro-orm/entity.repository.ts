@@ -1,4 +1,4 @@
-import { AnyEntity, EntityName, FilterQuery, FindOptions } from '@mikro-orm/core';
+import { AnyEntity, EntityName, FilterQuery, FindOptions, Loaded } from '@mikro-orm/core';
 import MongoDB from '../mongodb/mongodb.service';
 
 export default class EntityRepository<T extends AnyEntity<T>> {
@@ -22,13 +22,13 @@ export default class EntityRepository<T extends AnyEntity<T>> {
     return data;
   }
 
-  find<D extends AnyEntity<T>, P extends string = never>(
+  async find<D extends AnyEntity<T>, P extends string = never>(
     _entityName: EntityName<T>,
     where: FilterQuery<D>,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _options: FindOptions<T, P> = {},
-  ) {
-    return this.mongoDB.find<T>(JSON.parse(JSON.stringify(where)));
+  ): Promise<Loaded<T, P>[]> {
+    return this.mongoDB.find<T>(JSON.parse(JSON.stringify(where))) as unknown as Loaded<T, P>[];
   }
 
   async persistAndFlush(entity: AnyEntity): Promise<void> {

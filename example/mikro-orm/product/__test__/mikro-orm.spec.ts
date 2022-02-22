@@ -1,3 +1,4 @@
+import { Entity } from '@mikro-orm/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import EntityRepository from '../../../../src/mikro-orm/entity.repository';
@@ -5,6 +6,7 @@ import MongoDB from '../../../../src/mongodb/mongodb.service';
 import Product from '../product.entity';
 import ProductRepository from '../product.repository';
 import ProductService from '../product.service';
+
 
 describe('Mikro-orm', () => {
   let productService: ProductService;
@@ -42,5 +44,15 @@ describe('Mikro-orm', () => {
     expect(productCollection[0].qty).toEqual(data.qty);
     // eslint-disable-next-line no-underscore-dangle
     expect(productCollection[0]._id).toBeDefined();
+  });
+
+  it('should return 0 results passing no arguments', async () => {
+    const productCollection = mongoDB.getCollection<Product>(
+      mongoDB.getDatabaseName(),
+      mongoDB.getCollectionName(),
+    );
+    const productsResult = productCollection.find<Product>('products', {});
+    expect(productsResult.length).toBe(0);
+    expect(productsResult).toEqual([]);
   });
 });
